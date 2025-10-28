@@ -7,8 +7,10 @@ import { UpdateVehicleDto } from './dto/update-vehicle.dto';
 export class VehiclesService {
   constructor(private prisma: PrismaService) {}
 
-  async assertDriver(driverId: string) {
-    const d = await this.prisma.driver.findFirst({ where: { id: driverId, isDeleted: false } });
+  private async assertDriver(driverId: string) {
+    const d = await this.prisma.driver.findFirst({
+      where: { id: driverId, isDeleted: false },
+    });
     if (!d) throw new NotFoundException('Driver not found');
   }
 
@@ -23,7 +25,10 @@ export class VehiclesService {
 
   async update(driverId: string, vehicleId: string, dto: UpdateVehicleDto) {
     await this.assertDriver(driverId);
-    return this.prisma.vehicle.update({ where: { id: vehicleId }, data: dto as any });
+    return this.prisma.vehicle.update({
+      where: { id: vehicleId },
+      data: dto as any,
+    });
   }
 
   remove(_driverId: string, vehicleId: string) {
