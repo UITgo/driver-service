@@ -22,7 +22,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/driver-service:latest .
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/driver-service:latest ./crud
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/driver-service:latest
